@@ -1,0 +1,18 @@
+[package]
+name = "usbguard_notify"
+version = "0.1.0"
+authors = ["Leopold Johannes Meinel"]
+edition = "2021"
+description = "Manage usbguard device policy with notifications"
+homepage = "https://leo.meinel.dev/usbguard_notify"
+repository = "https://github.com/LeoMeinel/usbguard_notify"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
