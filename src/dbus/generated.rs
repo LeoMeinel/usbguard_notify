@@ -13,7 +13,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.usbguard.Devices1`
 #[dbus_proxy(interface = "org.usbguard.Devices1", assume_defaults = true)]
 trait Devices1 {
-    /// applyDevicePolicy method
+    /// Apply an authorization target to a device.
     ///
     /// # Arguments
     ///
@@ -22,69 +22,37 @@ trait Devices1 {
     ///              - values: `0 = Allow` `1 = Block` `2 = Reject`
     /// * `permanent` - A boolean flag specifying whether an allow rule should
     ///                 be appended to the policy.
+    ///
+    /// # Returns
+    ///
     /// * `rule_id` - If permanent was set to true, the method will return an
     ///               ID of the rule that was modified or created because of
     ///               this request.
     fn apply_device_policy(&self, id: u32, target: u8, permanent: bool) -> zbus::Result<u32>;
 
-    /// DevicePolicyApplied signal
-    ///
-    /// Notify about a change of a USB device.
-    /// This is a superset of DevicePolicyChanged and will always be thrown
-    /// when a device is inserted, authorised, or rejected.
-    ///
-    /// # Arguments
-    ///
-    /// * `id` - Device id of the device
-    /// * `target_new` - Current authorization target in numerical form.
-    ///                  - values: `0 = Allow` `1 = Block` `2 = Reject`
-    /// * `device_rule` - Device specific rule.
-    /// * `rule_id` - A rule id of the matched rule.
-    ///               - reserved values: `4294967294 (UINT32_MAX - 1)`
-    /// * `attributes` - A dictionary of device attributes and their values.
-    ///
-    /// ## attributes
-    ///
-    /// * id - the USB device ID in the form VID:PID
-    /// * name
-    /// * serial
-    /// * via-port
-    /// * hash
-    /// * parent-hash
-    /// * with-interface
-    /// * with-connect-type - either `"hardwired"`, `"hotplug"`, or `""` for unknown
-    #[dbus_proxy(signal)]
-    fn device_policy_applied(
-        &self,
-        id: u32,
-        target_new: u8,
-        device_rule: &str,
-        rule_id: u32,
-        attributes: std::collections::HashMap<&str, &str>,
-    ) -> zbus::Result<()>;
-
-    /// DevicePolicyChanged signal
-    ///
-    /// Notify about a change of a USB device authorization target.
+    /// List devices that match the specified query. The query uses the rule
+    /// language syntax and the devices are returned as device specific rules.
+    /// The target in each rule represents the current authorization state of
+    /// the device. Order of the returned devices is not defined and should not
+    /// be relied upon.
     ///
     /// # Arguments
     ///
-    /// * `id` - Device id of the device.
-    /// * `target_old` - Previous authorization target in numerical form.
-    ///                  - values: `0 = Allow` `1 = Block` `2 = Reject`
-    /// * `target_new` - Current authorization target in numerical form.
-    /// * `device_rule` - Device specific rule.
-    /// * `rule_id` - A rule id of the matched rule.
-    ///               - reserved values: `4294967294 (UINT32_MAX - 1)`
-    /// * `attributes` - A dictionary of device attributes and their values.
-    #[dbus_proxy(signal)]
-    fn device_policy_changed(
-        &self,
-        id: u32,
-        target_old: u8,
-        target_new: u8,
-        device_rule: &str,
-        rule_id: u32,
-        attributes: std::collections::HashMap<&str, &str>,
-    ) -> zbus::Result<()>;
+    /// * `query` - A query, in the rule language syntax, for matching devices.
+    ///
+    /// ## Example queries
+    /// * 'match' - Matches any device.
+    /// * 'allow' - Matches only authorized devices.
+    /// * 'block' - Matches only unauthorized devices.
+    /// * 'match with-interface one-of { 03:00:01 03:01:01 }' - Matches any
+    ///                                                         device with
+    ///                                                         a
+    ///                                                         HID/Keyboard
+    ///                                                         interface.
+    ///
+    /// # Returns
+    ///
+    /// * `devices` - An array of (device_id, device_rule) tuples that match the
+    ///               query.
+    fn list_devices(&self, query: &str) -> zbus::Result<Vec<(u32, String)>>;
 }

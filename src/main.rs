@@ -27,7 +27,11 @@ async fn run() -> Result<(), Box<dyn Error>> {
     // debugging to figure out zbus
     // TODO: Find out how to extract needed information and match that information
     // proxy.apply_device_policy(todo!(), 0, false); // allow device
-    let id = proxy.receive_device_policy_changed().await?;
-    println!("{:?}", id);
+    let devices = proxy.list_devices("allow").await?;
+    for result in devices {
+        let device_id = result.0;
+        let device_rule = result.1;
+        println!("{}: {}", device_id, device_rule)
+    }
     Ok(())
 }

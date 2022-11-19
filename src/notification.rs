@@ -21,6 +21,10 @@ impl NotificationApplyDevicePolicy {
             notification: Notification::new()
                 .summary("USBGuard")
                 // dbus -> get device and insert into body
+                //
+                //         #structure
+                //
+                //         (Remove/Insert) device_name: target
                 .body("todo!()")
                 .icon("usbguard-icon")
                 .action("allow", "Allow")
