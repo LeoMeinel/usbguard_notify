@@ -13,9 +13,9 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.usbguard.Devices1`
 #[dbus_proxy(
     interface = "org.usbguard.Devices1",
+    default_service = "org.usbguard1",
     default_path = "/org/usbguard1/Devices"
 )]
-// usbguard, usbguard1, org.usbguard1
 trait Devices1 {
     /// Apply an authorization target to a device.
     ///
