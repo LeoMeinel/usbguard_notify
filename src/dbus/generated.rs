@@ -45,14 +45,14 @@ trait Devices1 {
     ///
     /// ## attributes
     ///
-    /// * id (the USB device ID in the form VID:PID)
+    /// * id - the USB device ID in the form VID:PID
     /// * name
     /// * serial
     /// * via-port
     /// * hash
     /// * parent-hash
     /// * with-interface
-    /// * with-connect-type (either "hardwired", "hotplug", or the empty string for unknown)
+    /// * with-connect-type - either `"hardwired"`, `"hotplug"`, or `""` for unknown
     #[dbus_proxy(signal)]
     fn device_policy_applied(
         &self,
