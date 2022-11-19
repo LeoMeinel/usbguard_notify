@@ -10,14 +10,14 @@
 
 use notify_rust::{Notification, NotificationHandle};
 
-pub struct NotificationChangePolicy {
+pub struct NotificationApplyDevicePolicy {
     pub notification: NotificationHandle,
     pub device_id: u32,
 }
 
-impl NotificationChangePolicy {
-    pub fn new() -> NotificationChangePolicy {
-        NotificationChangePolicy {
+impl NotificationApplyDevicePolicy {
+    pub fn new() -> NotificationApplyDevicePolicy {
+        NotificationApplyDevicePolicy {
             notification: Notification::new()
                 .summary("USBGuard")
                 // dbus -> get device and insert into body
@@ -40,8 +40,8 @@ impl NotificationChangePolicy {
     }
 }
 
-impl Default for NotificationChangePolicy {
+impl Default for NotificationApplyDevicePolicy {
     fn default() -> Self {
-        NotificationChangePolicy::new()
+        NotificationApplyDevicePolicy::new()
     }
 }
