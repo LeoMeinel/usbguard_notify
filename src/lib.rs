@@ -10,11 +10,3 @@
 
 pub mod dbus;
 pub mod notification;
-
-/*
-struct Device {
-    id: u32,
-    target_old: u32,
-    target_new: u32,
-}
-*/

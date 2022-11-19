@@ -25,7 +25,7 @@ trait Devices1 {
     /// * `rule_id` - If permanent was set to true, the method will return an
     ///               ID of the rule that was modified or created because of
     ///               this request.
-    fn apply_device_policy(&self, id: u32, target: u32, permanent: bool) -> zbus::Result<u32>;
+    fn apply_device_policy(&self, id: u32, target: u8, permanent: bool) -> zbus::Result<u32>;
 
     /// DevicePolicyApplied signal
     ///
@@ -57,7 +57,7 @@ trait Devices1 {
     fn device_policy_applied(
         &self,
         id: u32,
-        target_new: u32,
+        target_new: u8,
         device_rule: &str,
         rule_id: u32,
         attributes: std::collections::HashMap<&str, &str>,
@@ -81,8 +81,8 @@ trait Devices1 {
     fn device_policy_changed(
         &self,
         id: u32,
-        target_old: u32,
-        target_new: u32,
+        target_old: u8,
+        target_new: u8,
         device_rule: &str,
         rule_id: u32,
         attributes: std::collections::HashMap<&str, &str>,
