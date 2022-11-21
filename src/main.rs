@@ -25,6 +25,6 @@ async fn run() -> Result<(), Box<dyn Error>> {
     //       Get device_name, device_id, target
     //       apply_device_policy via usbguard_api
     // proxy.apply_device_policy(todo!(), 0, false); // allow device
-    ffi::getDeviceList();
+    ffi::getParameter("allow");
     Ok(())
 }

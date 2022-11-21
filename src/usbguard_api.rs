@@ -11,11 +11,7 @@
 #[cxx::bridge]
 pub mod ffi {
     unsafe extern "C++" {
-        include!(<usbguard/DeviceManager.hpp>);
-        include!(<usbguard/Rule.hpp>);
-        type Device;
-        pub fn applyDevicePolicy(id: u32, target: u8);
-        pub fn getDevice(id: u32) -> SharedPtr<Device>;
-        pub fn getDeviceList(); 
+        include!(<usbguard/Interface.hpp>);
+        pub fn getParameter(name: &str) -> String;
     }
 }
