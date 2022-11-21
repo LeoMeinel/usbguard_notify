@@ -12,7 +12,7 @@ license = "GPL-3.0-or-later"
 [dependencies]
 notify-rust = "4.5.10"
 tokio = { version = "1.22.0", features = ["rt", "rt-multi-thread", "macros"] }
-zbus = {version = "3.5.0", default-features = false, features = ["tokio"]}
+cxx = "1.0.82"
 
 [profile.dev]
 opt-level = 0

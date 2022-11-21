@@ -8,5 +8,5 @@
  * -----
  */
 
-pub mod dbus;
 pub mod notification;
+pub mod usbguard_api;
