@@ -7,3 +7,15 @@
  * URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html
  * -----
  */
+
+#[cxx::bridge]
+pub mod ffi {
+    unsafe extern "C++" {
+        include!(<usbguard/DeviceManager.hpp>);
+        include!(<usbguard/Rule.hpp>);
+        type Device;
+        pub fn applyDevicePolicy(id: u32, target: u8);
+        pub fn getDevice(id: u32) -> SharedPtr<Device>;
+        pub fn getDeviceList(); 
+    }
+}

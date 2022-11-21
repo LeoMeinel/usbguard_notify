@@ -11,6 +11,7 @@
 use std::error::Error;
 
 use usbguard_notify::notification::NotificationApplyDevicePolicy;
+use usbguard_notify::usbguard_api::ffi;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -24,5 +25,6 @@ async fn run() -> Result<(), Box<dyn Error>> {
     //       Get device_name, device_id, target
     //       apply_device_policy via usbguard_api
     // proxy.apply_device_policy(todo!(), 0, false); // allow device
+    ffi::getDeviceList();
     Ok(())
 }
