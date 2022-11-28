@@ -2,7 +2,7 @@
 
 Manage usbguard device policy with notifications
 
-## features
+## Features
 
-- notify when usbguard notices new device
+- Notify when usbguard notices new device
 - Deny or Allow that device via usbguard
