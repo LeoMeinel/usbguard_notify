@@ -1,3 +1,3 @@
 [submodule "include/usbguard"]
-path = include/usbguard
-url = https://github.com/USBGuard/usbguard.git
+	path = include/usbguard
+	url = https://github.com/USBGuard/usbguard.git
