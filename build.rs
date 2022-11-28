@@ -11,6 +11,7 @@
 #[allow(unused_must_use)]
 fn main() {
     println!("cargo:rerun-if-changed=src/usbguard_api.rs");
+    println!("cargo:rerun-if-changed=include/*");
     // FIXME: Find out how to link against /usr/lib/usbguard implicitly
     cxx_build::bridge("src/usbguard_api.rs")
         .cpp(true)

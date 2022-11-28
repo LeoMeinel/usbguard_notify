@@ -11,7 +11,7 @@
 #[cxx::bridge]
 pub mod ffi {
     unsafe extern "C++" {
-        include!(<usbguard/Interface.hpp>);
+        include!("usbguard/src/Library/public/usbguard/Interface.hpp");
         pub fn getParameter(name: &str) -> String;
     }
 }
